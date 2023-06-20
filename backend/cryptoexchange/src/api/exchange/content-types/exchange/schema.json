@@ -1,0 +1,43 @@
+{
+  "kind": "collectionType",
+  "collectionName": "exchanges",
+  "info": {
+    "singularName": "exchange",
+    "pluralName": "exchanges",
+    "displayName": "Exchange",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true,
+      "maxLength": 50,
+      "minLength": 2
+    },
+    "endpoint": {
+      "type": "string",
+      "required": true
+    },
+    "country": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::country.country",
+      "inversedBy": "exchanges"
+    },
+    "code": {
+      "type": "string",
+      "required": true,
+      "unique": true
+    },
+    "crypto_fiat_price": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::crypto-fiat-price.crypto-fiat-price",
+      "inversedBy": "exchanges"
+    }
+  }
+}

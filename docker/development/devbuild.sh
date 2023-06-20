@@ -1,5 +1,8 @@
 #!/bin/bash
 printf 'Starting first build...\n\n'
 docker-compose up --build -d
+docker exec cryptoexchangestrapi npm install
 
-printf 'Installing Strapi...\n\n'
+sleep 10
+
+docker exec cryptoexchangestrapi npm run develop

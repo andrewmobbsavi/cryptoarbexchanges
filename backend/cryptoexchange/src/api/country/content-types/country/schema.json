@@ -1,0 +1,40 @@
+{
+  "kind": "collectionType",
+  "collectionName": "countries",
+  "info": {
+    "singularName": "country",
+    "pluralName": "countries",
+    "displayName": "country",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true,
+      "unique": false,
+      "maxLength": 100
+    },
+    "code": {
+      "type": "string",
+      "maxLength": 3,
+      "minLength": 2,
+      "unique": true,
+      "required": true
+    },
+    "currency": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::currency.currency"
+    },
+    "exchanges": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::exchange.exchange",
+      "mappedBy": "country"
+    }
+  }
+}

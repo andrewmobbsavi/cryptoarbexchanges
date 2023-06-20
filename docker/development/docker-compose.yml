@@ -9,8 +9,8 @@ services:
     ports:
       - "1337:1337"
     build:
-      context: .
-      dockerfile: Dockerfile
+      context: ../../
+      dockerfile: DockerfileDevBackend
     volumes:
       - ../../backend:/cryptoexchangestrapi
     hostname: cryptoexchangestrapi

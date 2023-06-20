@@ -1,0 +1,38 @@
+{
+  "kind": "collectionType",
+  "collectionName": "crypto_fiat_prices",
+  "info": {
+    "singularName": "crypto-fiat-price",
+    "pluralName": "crypto-fiat-prices",
+    "displayName": "crypto_fiat_price",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "crypto": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::crypto.crypto",
+      "inversedBy": "crypto_fiat_prices"
+    },
+    "currency": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::currency.currency",
+      "inversedBy": "crypto_fiat_prices"
+    },
+    "exchanges": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::exchange.exchange",
+      "mappedBy": "crypto_fiat_price"
+    },
+    "rate": {
+      "type": "decimal",
+      "required": true
+    }
+  }
+}

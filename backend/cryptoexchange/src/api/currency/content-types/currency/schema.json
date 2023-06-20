@@ -1,0 +1,32 @@
+{
+  "kind": "collectionType",
+  "collectionName": "currencies",
+  "info": {
+    "singularName": "currency",
+    "pluralName": "currencies",
+    "displayName": "currency",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "code": {
+      "type": "string",
+      "required": true,
+      "unique": true,
+      "maxLength": 3,
+      "minLength": 2
+    },
+    "crypto_fiat_prices": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::crypto-fiat-price.crypto-fiat-price",
+      "mappedBy": "currency"
+    }
+  }
+}

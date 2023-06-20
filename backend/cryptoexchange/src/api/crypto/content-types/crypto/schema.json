@@ -1,0 +1,32 @@
+{
+  "kind": "collectionType",
+  "collectionName": "cryptos",
+  "info": {
+    "singularName": "crypto",
+    "pluralName": "cryptos",
+    "displayName": "crypto"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "code": {
+      "type": "string",
+      "required": true,
+      "unique": true,
+      "maxLength": 5,
+      "minLength": 2
+    },
+    "crypto_fiat_prices": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::crypto-fiat-price.crypto-fiat-price",
+      "mappedBy": "crypto"
+    }
+  }
+}
