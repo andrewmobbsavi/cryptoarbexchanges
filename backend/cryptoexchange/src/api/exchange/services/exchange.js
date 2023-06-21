@@ -71,14 +71,20 @@ module.exports = createCoreService('api::exchange.exchange',{
     async processBth(exchangeData, cryptos){
         console.log(`Getting ${exchangeData.name} data...`)
         const api = exchangeData.endpoint;
-        const response = await fetch(api);
-        const data = await response.json();
+        
+        try{
+            
+            const response = await fetch(api);
+            const data = await response.json();
 
-        cryptos.map((item)=>{
-            const price = data.data[item.code].closing_price;
-            //add the price to the database
-            const entry = strapi.service('api::crypto-fiat-price.crypto-fiat-price').addCryptoPrice(item.id, exchangeData.country.currency.id, exchangeData.id, price)
-        });
+            cryptos.map((crypto)=>{
+                const price = data.data[crypto.code].bids[0].price;
+                //add the price to the database
+                const entry = strapi.service('api::crypto-fiat-price.crypto-fiat-price').addCryptoPrice(crypto.id, exchangeData.country.currency.id, exchangeData.id, price)
+            });
+        } catch {
+            console.log(`Error. Unable to get ${exchangeData.name} data`);
+        }
     },
     /**
      * We want to process Gemini API values
@@ -91,15 +97,19 @@ module.exports = createCoreService('api::exchange.exchange',{
     async processGem(exchangeData, cryptos){
         console.log(`Getting ${exchangeData.name} data...`);
 
-        cryptos.map(async (item)=>{
-            const api = `${exchangeData.endpoint}${item.code}${exchangeData.country.currency.code}`;
+        cryptos.map(async (crypto)=>{
+            try{
+                const api = `${exchangeData.endpoint}${crypto.code}${exchangeData.country.currency.code}`;
 
-            const response = await fetch(api);
-            const data = await response.json();
+                const response = await fetch(api);
+                const data = await response.json();
 
-            const price = data.bid;
-            //add the price to the database
-            const entry = strapi.service('api::crypto-fiat-price.crypto-fiat-price').addCryptoPrice(item.id, exchangeData.country.currency.id, exchangeData.id, price)
+                const price = data.bid;
+                //add the price to the database
+                const entry = strapi.service('api::crypto-fiat-price.crypto-fiat-price').addCryptoPrice(crypto.id, exchangeData.country.currency.id, exchangeData.id, price);
+            } catch {
+                console.log(`Unable to get ${exchangeData.name} ${crypto.code} data...`)
+            }
         });
     }
 });
