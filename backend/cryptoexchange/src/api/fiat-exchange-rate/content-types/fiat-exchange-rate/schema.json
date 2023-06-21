@@ -1,0 +1,30 @@
+{
+  "kind": "collectionType",
+  "collectionName": "fiat_exchange_rates",
+  "info": {
+    "singularName": "fiat-exchange-rate",
+    "pluralName": "fiat-exchange-rates",
+    "displayName": "fiat_exchange_rate",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "base_currency": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::currency.currency"
+    },
+    "currency": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::currency.currency"
+    },
+    "rate": {
+      "type": "float",
+      "required": true
+    }
+  }
+}

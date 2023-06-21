@@ -1,0 +1,10 @@
+FROM node:18.16.0-alpine3.17 as cryptoexchangefrontend
+
+ENV NODE_ENV=development
+
+WORKDIR "/cryptoexchangefrontend/cryptoexchange/"
+
+EXPOSE 8080
+
+
+ENTRYPOINT ["tail", "-f", "/dev/null"]

@@ -18,17 +18,17 @@ services:
       - cryptoexchangedbs
     links:
       - cryptoexchangedbs
-  # cryptoexchangefrontend:
-  #   image: node:18.16.0-alpine3.17
-  #   container_name: cryptoexchangefrontend
-  #   network_mode: bridge
-  #   ports:
-  #     - "8080:8080"
-  #   build:
-  #     context: .
-  #     dockerfile: Dockerfilefrontend
-  #   volumes:
-  #     - ./frontend:/cryptoexchangefrontend
+  cryptoexchangefrontend:
+    image: node:18.16.0-alpine3.17
+    container_name: cryptoexchangefrontend
+    network_mode: bridge
+    ports:
+      - "8080:8080"
+    build:
+      context: ../../
+      dockerfile: Dockerfilefrontend
+    volumes:
+      - ./frontend:/cryptoexchangefrontend
   # MySQL Service for development only. 
   cryptoexchangedbs:
     image: mysql:8.0.28

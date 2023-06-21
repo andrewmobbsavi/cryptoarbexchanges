@@ -14,8 +14,8 @@ module.exports = createCoreService('api::exchange.exchange',{
      */
     exchangeList(){
         const exchanges = Object.freeze({
-            GEM: 'GEM',
-            BTH: 'BTH'
+            GEM: 'GEM', //GET https://api.gemini.com/v1/pubticker/
+            BTH: 'BTH' //https://api.bithumb.com/public/orderbook/ALL_KRW
         });
 
         return exchanges;
