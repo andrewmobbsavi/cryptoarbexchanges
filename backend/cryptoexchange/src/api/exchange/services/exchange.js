@@ -50,7 +50,7 @@ module.exports = createCoreService('api::exchange.exchange',{
         exchanges.map(async (item)=>{
             switch(item.code) {
                 case this.exchangeList().GEM:
-                    
+                    await this.processGem(item, cryptos);
                     break;
                 case this.exchangeList().BTH:
                     await this.processBth(item, cryptos);
@@ -75,8 +75,29 @@ module.exports = createCoreService('api::exchange.exchange',{
         const data = await response.json();
 
         cryptos.map((item)=>{
-            console.log(exchangeData);
             const price = data.data[item.code].closing_price;
+            //add the price to the database
+            const entry = strapi.service('api::crypto-fiat-price.crypto-fiat-price').addCryptoPrice(item.id, exchangeData.country.currency.id, exchangeData.id, price)
+        });
+    },
+    /**
+     * We want to process Gemini API values
+     * We will query the api, extract the relevant crypto prices
+     * in USD. We will then add the data to the database
+     * 
+     * @param {*} exchangeData - object of exchanges from our database
+     * @param {*} cryptos - object of cryptos from our database
+     */
+    async processGem(exchangeData, cryptos){
+        console.log(`Getting ${exchangeData.name} data...`);
+
+        cryptos.map(async (item)=>{
+            const api = `${exchangeData.endpoint}${item.code}${exchangeData.country.currency.code}`;
+
+            const response = await fetch(api);
+            const data = await response.json();
+
+            const price = data.bid;
             //add the price to the database
             const entry = strapi.service('api::crypto-fiat-price.crypto-fiat-price').addCryptoPrice(item.id, exchangeData.country.currency.id, exchangeData.id, price)
         });

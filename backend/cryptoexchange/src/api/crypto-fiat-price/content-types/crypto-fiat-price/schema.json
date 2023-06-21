@@ -24,9 +24,9 @@
       "target": "api::currency.currency",
       "inversedBy": "crypto_fiat_prices"
     },
-    "exchanges": {
+    "exchange": {
       "type": "relation",
-      "relation": "oneToMany",
+      "relation": "oneToOne",
       "target": "api::exchange.exchange"
     },
     "rate": {

@@ -16,12 +16,11 @@ module.exports = createCoreService('api::crypto-fiat-price.crypto-fiat-price',{
      * @returns object
      */
     async addCryptoPrice(crypto, fiat, exchange, rate){
-        // console.log(exchange);
         const entry = await strapi.entityService.create('api::crypto-fiat-price.crypto-fiat-price', {
             data: {
                 crypto: crypto,
                 currency: fiat,
-                exchanges: exchange,
+                exchange: exchange,
                 rate: rate
             },
         });
