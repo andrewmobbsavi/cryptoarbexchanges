@@ -27,8 +27,7 @@
     "exchanges": {
       "type": "relation",
       "relation": "oneToMany",
-      "target": "api::exchange.exchange",
-      "mappedBy": "crypto_fiat_price"
+      "target": "api::exchange.exchange"
     },
     "rate": {
       "type": "decimal",

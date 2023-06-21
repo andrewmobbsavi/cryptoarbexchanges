@@ -32,12 +32,6 @@
       "type": "string",
       "required": true,
       "unique": true
-    },
-    "crypto_fiat_price": {
-      "type": "relation",
-      "relation": "manyToOne",
-      "target": "api::crypto-fiat-price.crypto-fiat-price",
-      "inversedBy": "exchanges"
     }
   }
 }
