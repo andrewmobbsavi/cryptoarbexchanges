@@ -28,7 +28,7 @@ services:
       context: ../../
       dockerfile: Dockerfilefrontend
     volumes:
-      - ./frontend:/cryptoexchangefrontend
+      - ../../frontend:/cryptoexchangefrontend
   # MySQL Service for development only. 
   cryptoexchangedbs:
     image: mysql:8.0.28
