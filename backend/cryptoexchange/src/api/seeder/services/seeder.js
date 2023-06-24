@@ -73,6 +73,13 @@ module.exports = createCoreService('api::seeder.seeder',{
                     code: 'BTC'
                 }
             });
+
+            await strapi.entityService.create('api::crypto.crypto',{
+                data:{
+                    name: 'Ethereum',
+                    code: 'ETH'
+                }
+            });
         }
     },
     /**

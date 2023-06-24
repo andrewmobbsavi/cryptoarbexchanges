@@ -21,12 +21,6 @@
       "unique": true,
       "maxLength": 5,
       "minLength": 2
-    },
-    "crypto_fiat_prices": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::crypto-fiat-price.crypto-fiat-price",
-      "mappedBy": "crypto"
     }
   }
 }

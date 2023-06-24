@@ -18,5 +18,10 @@ module.exports = createCoreController('api::exchange.exchange',{
         const cryptos = await strapi.service('api::crypto.crypto').getCryptos();
 
         const status = await strapi.service('api::exchange.exchange').processExchanges(exchanges, cryptos);
+
+        return {
+            status: true,
+            message: 'Exchange price data extraction complete...'
+        }
     },
 });

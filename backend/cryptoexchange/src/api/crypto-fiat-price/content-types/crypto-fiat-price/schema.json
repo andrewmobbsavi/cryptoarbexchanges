@@ -14,9 +14,8 @@
   "attributes": {
     "crypto": {
       "type": "relation",
-      "relation": "manyToOne",
-      "target": "api::crypto.crypto",
-      "inversedBy": "crypto_fiat_prices"
+      "relation": "oneToOne",
+      "target": "api::crypto.crypto"
     },
     "currency": {
       "type": "relation",
