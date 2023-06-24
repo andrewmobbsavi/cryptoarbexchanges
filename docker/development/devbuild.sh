@@ -6,3 +6,4 @@ docker exec cryptoexchangestrapi npm install
 sleep 10
 
 docker exec cryptoexchangestrapi npm run develop
+

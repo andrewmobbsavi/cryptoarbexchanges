@@ -1,0 +1,1 @@
+curl localhost:1337/api/seeder/seed

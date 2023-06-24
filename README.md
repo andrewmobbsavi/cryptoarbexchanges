@@ -17,6 +17,12 @@ This will build the development environment in docker, and will run npm install 
 
 [The Strapi Admin Area](http://localhost:1337/admin) 
 
+You will be asked to generate admin login credentials. 
+
+After you have generated your admin credentials, you will need to seed the database:
+
+- ./seed.sh
+
 ## Running development after setup
 
 - cd docker/development
