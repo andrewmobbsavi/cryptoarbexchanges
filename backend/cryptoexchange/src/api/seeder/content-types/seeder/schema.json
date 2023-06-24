@@ -1,0 +1,20 @@
+{
+  "kind": "singleType",
+  "collectionName": "seeders",
+  "info": {
+    "singularName": "seeder",
+    "pluralName": "seeders",
+    "displayName": "seeder"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "seeded": {
+      "type": "boolean",
+      "default": false,
+      "required": true
+    }
+  }
+}
