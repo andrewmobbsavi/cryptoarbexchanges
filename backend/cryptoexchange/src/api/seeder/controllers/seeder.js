@@ -15,12 +15,12 @@ module.exports = createCoreController('api::seeder.seeder',{
 
         const seeded = await strapi.service('api::seeder.seeder').getSeeded();
         
-        seeded.seeded = seeded.seeded ? seeded.seeded : false;
-
-        if(seeded.seeded){
-            return {
-                status: false,
-                message: 'Seed has already been completed...'
+        if(seeded){
+            if(seeded.seeded){
+                return {
+                    status: false,
+                    message: 'Seed has already been completed...'
+                }
             }
         }
 
