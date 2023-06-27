@@ -4,7 +4,7 @@ ENV NODE_ENV=development
 
 WORKDIR "/cryptoexchangefrontend/"
 
-EXPOSE 8080
+EXPOSE 3000
 
 
 ENTRYPOINT ["tail", "-f", "/dev/null"]

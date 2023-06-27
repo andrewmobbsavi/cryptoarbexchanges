@@ -23,7 +23,7 @@ services:
     container_name: cryptoexchangefrontend
     network_mode: bridge
     ports:
-      - "8080:8080"
+      - "3000:3000"
     build:
       context: ../../
       dockerfile: Dockerfilefrontend
