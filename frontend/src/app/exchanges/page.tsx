@@ -3,8 +3,8 @@
 import { useState, useEffect } from 'react';
 
 import PriceTable from '../components/organisms/PriceTable';
-import {getPrices, getCryptos, getFiat, getExchangeRatesUri} from '../../../utils/urls';
-import {getQueryDate} from '../../../utils/dates';
+import { getPrices, getCryptos, getExchangeRatesUri, getCountriesUri } from '../../../utils/urls';
+import { getQueryDate } from '../../../utils/dates';
 import { Container, Heading } from '@chakra-ui/react';
 import { Flex, Spacer } from '@chakra-ui/react'
 import { Select } from '@chakra-ui/react';
@@ -14,16 +14,13 @@ import useSWR from 'swr';
 
 //We want to get the exchanges
 const cryptoUri = getCryptos();
-const fiatUri = getFiat();
+const countriesUri = getCountriesUri();
 
 const fetcher = async (...args: any) => {
     const req = await fetch(args);
     const {data} = await req.json();
     return data;
 };
-
-
-
 
 
 export default function Home() {
@@ -42,9 +39,11 @@ export default function Home() {
     const [exchangeDataMain, setExchangeDataMain] = useState([]);
 
     const { data : cryptoData } = useSWR(cryptoUri, fetcher);
-    const { data : fiatData } = useSWR(fiatUri, fetcher);
+    const { data : countriesData } = useSWR(countriesUri, fetcher);
 
     const exchanges: number[] = [2,4,6,8,10,12];
+
+    console.log(countriesData)
 
     useEffect(()=>{
         setPricesUri(getPrices(1, date, cryptoCode, fiatA, fiatB));
@@ -62,7 +61,7 @@ export default function Home() {
             setExchangeRate(data?.data[0]?.attributes?.rate)
         });
 
-    },[fiatA, fiatB, cryptoCode, pricesUri, date]);
+    },[fiatA, fiatB, cryptoCode, pricesUri, date, exchangeRatesUri]);
     
     return (
         <>
@@ -101,7 +100,7 @@ export default function Home() {
                 <Select 
                     className='bg-slate-800 border border-gray-300 text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5' 
                     
-                    placeholder='Select Base Fiat'
+                    placeholder='Select Base Country'
 
                     onChange={(event) => {
                             setFiatA(event.target.value);
@@ -111,8 +110,8 @@ export default function Home() {
                     
                 >
                 {
-                    fiatData?.map((item: any, key: number) => {
-                        return <option value={item.attributes.code} key={key}>{item.attributes.name}</option>
+                    countriesData?.map((item: any, key: number) => {
+                        return <option value={item.attributes.currency.data.attributes.code} key={key}>{item.attributes.name}</option>
                     })
                 }
                 </Select>
@@ -121,7 +120,7 @@ export default function Home() {
 
                 <Select className='bg-slate-800 border border-gray-300 text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5' 
                 
-                placeholder='Select Base Fiat'
+                placeholder='Select Comparison Country'
 
                 
                 onChange={(event) => {
@@ -131,8 +130,8 @@ export default function Home() {
                 }
                 >
                 {
-                    fiatData?.map((item: any, key: number) => {
-                        return <option value={item.attributes.code} key={key}>{item.attributes.name}</option>
+                    countriesData?.map((item: any, key: number) => {
+                        return <option value={item.attributes.currency.data.attributes.code} key={key}>{item.attributes.name}</option>
                     })
                 }
                 </Select>

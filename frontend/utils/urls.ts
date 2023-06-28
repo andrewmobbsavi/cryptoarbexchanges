@@ -14,6 +14,9 @@ module.exports = {
     },
     getExchangeRatesUri(baseCur: string, compareCur: string){
         return `${process.env.NEXT_PUBLIC_BACKEND_URI}fiat-exchange-rates?sort[createdAt]=DESC&fields[0]=rate&fields[1]=createdAt&&pagination[pageSize]=1&pagination[page]=1&filters[crypto][code][0]=BTC&filters[base_currency][code][0]=${baseCur}&filters[currency][code][1]=${compareCur}`;
+    },
+    getCountriesUri(){
+        return `${process.env.NEXT_PUBLIC_BACKEND_URI}countries?[fields][0]=code&[fields][1]=name&populate[currency][fields][0]=id&populate[currency][fields][1]=code&sort[name]=ASC`;
     }
 
 }
